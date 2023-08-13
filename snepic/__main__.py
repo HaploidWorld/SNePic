@@ -1,6 +1,4 @@
 import logging
-import subprocess
-from typing import List
 from pathlib import Path
 from sys import argv as sysargs
 
@@ -26,7 +24,6 @@ def print_config() -> None:
         print(f"{param}: {val}")
 
 
-
 def create_dir(dir: str) -> None:
     """
     Creates dir if not exists
@@ -45,7 +42,6 @@ def main():
         print(f"New pheno param is {sysargs[1]}")
         PHENO_PARAM = sysargs[1]
 
-
     print("Proceed? y or n")
     b = input()
     if b == "n":
@@ -58,12 +54,15 @@ def main():
     # prepare pheno (rename IDs)
     prepared_pheno_path = manipulate.prepare_pheno(config.INPUT_PHENO)
     # select param from config
-    selected_pheno_path = manipulate.select_columns(prepared_pheno_path, ["FID", "IID", PHENO_PARAM])
+    selected_pheno_path = manipulate.select_columns(
+        prepared_pheno_path,
+        ["FID", "IID", PHENO_PARAM]
+    )
     prepared_geno_path = manipulate.prepare_geno()
 
     # run plink pipeline (filter data and GWAS)
     plink.run_pipeline(selected_pheno_path, prepared_geno_path, PHENO_PARAM)
-    
+
     # run MIDESP
     run_midesp()
 
