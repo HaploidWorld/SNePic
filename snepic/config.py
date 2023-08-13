@@ -3,6 +3,8 @@ LOG_PATH = "./snepic.log"
 
 # replace with the path of PLINK binary (e.g. /usr/bin/plink1.9)
 PLINK_COMMAND = "../plink/plink"
+# replace with the path of MIDESP jar
+MIDESP_JAR = "../MIDESP_1.2.jar"
 
 INPUT_GENO = "../data/soybean_aa_genotypes.vcf"
 INPUT_PHENO = "../data/soybean_aa_phenotypes_renamed.tsv"

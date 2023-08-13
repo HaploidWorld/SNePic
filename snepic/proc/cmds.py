@@ -2,6 +2,8 @@ import subprocess
 import logging
 from typing import List
 
+import config
+
 
 def run_proc(args: List[str], stdout = False):
     """
@@ -28,16 +30,16 @@ def run_proc(args: List[str], stdout = False):
         raise RuntimeError("Check logs")
 
 
-def run_midesp():
+def run_midesp(tped: str, tfam: str):
     args = [
         "java", 
-        "-jar",  "../MIDESP_1.2.jar",
-        "-threads", "8", 
-        " -out", "./output/ala_Filtered_Pruned.epi", 
+        "-jar",  config.MIDESP_JAR,
+        "-threads", str(config.THREADS), 
+        " -out", config.OUTPUT_MIDESP, 
         "-keep", "0.25", "-fdr", "0.005",
         "-cont", "-k", "30",
         "-noapc",       #FIXME че делать
-        "../data/test_guide/ala_Filtered_Pruned.tped",
-        "../data/test_guide/ala_Filtered_Pruned.tfam",
+        "./temp/data_ready_to_midesp.tped",
+        "./temp/data_ready_to_midesp.tfam",
     ]
     run_proc(args)
