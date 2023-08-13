@@ -2,6 +2,8 @@ import subprocess
 import logging
 from typing import List
 
+import config
+
 
 def run_proc(args: List[str], stdout = False):
     """
@@ -31,13 +33,17 @@ def run_proc(args: List[str], stdout = False):
 def run_midesp():
     args = [
         "java", 
-        "-jar",  "../MIDESP_1.2.jar",
-        "-threads", "8", 
-        " -out", "./output/ala_Filtered_Pruned.epi", 
+        "-jar",  config.MIDESP_JAR,
+        "-threads", str(config.THREADS), 
+        "-out", config.OUTPUT_MIDESP,
         "-keep", "0.25", "-fdr", "0.005",
         "-cont", "-k", "30",
         "-noapc",       #FIXME че делать
-        "../data/test_guide/ala_Filtered_Pruned.tped",
-        "../data/test_guide/ala_Filtered_Pruned.tfam",
+        "./temp/data_ready_to_midesp.tped",
+        "./temp/data_ready_to_midesp.tfam",
     ]
+    print("MIDESP started")
+    logging.info("MIDESP started")
     run_proc(args)
+    print("MIDESP finished")
+    logging.info("MIDESP finished")

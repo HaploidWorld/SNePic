@@ -6,6 +6,7 @@ from sys import argv as sysargs
 
 import config
 from prep import manipulate, plink
+from proc import run_midesp
 
 
 logging.basicConfig(
@@ -20,7 +21,10 @@ def print_config() -> None:
     """
     Prints config variables
     """
-    ...
+    print("PARAMETERS:")
+    for param, val in config.__dict__.items():
+        print(f"{param}: {val}")
+
 
 
 def create_dir(dir: str) -> None:
@@ -59,6 +63,9 @@ def main():
 
     # run plink pipeline (filter data and GWAS)
     plink.run_pipeline(selected_pheno_path, prepared_geno_path, PHENO_PARAM)
+    
+    # run MIDESP
+    run_midesp()
 
 
 if __name__ == "__main__":
