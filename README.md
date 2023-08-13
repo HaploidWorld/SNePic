@@ -39,6 +39,7 @@ We will need python3.10+, [plink1.9](https://www.cog-genomics.org/plink/1.9/), [
 1. Filter input data: create SNP IDs (chr name + pos), rename IDs, LD pruning, ...
 2. GWAS via plink (--linear)
 3. MIDESP analysis
+- we are here :)
 4. Graph construction
 5. Selection of SNPs
 
