@@ -5,7 +5,7 @@ from typing import List
 import config
 
 
-def run_proc(args: List[str], stdout = False):
+def run_proc(args: List[str], stdout=False):
     """
     Runs subprocess and writes stderr to log, stdout to log if stdout is True
     """
@@ -23,7 +23,10 @@ def run_proc(args: List[str], stdout = False):
             logging.info(stdout_line.strip())
 
     if popen.returncode != 0:
-        logging.error(f"Something happened during executing {args[0]}... {popen.returncode}")
+        logging.error(
+            f"Something happened during executing {args[0]}...\
+                {popen.returncode}"
+        )
         for stderr_line in iter(popen.stderr.readline, ""):
             logging.error(stderr_line.strip())
         print(f"Something happened during executing {args[0]}..")
@@ -32,13 +35,13 @@ def run_proc(args: List[str], stdout = False):
 
 def run_midesp():
     args = [
-        "java", 
+        "java",
         "-jar",  config.MIDESP_JAR,
-        "-threads", str(config.THREADS), 
+        "-threads", str(config.THREADS),
         "-out", config.OUTPUT_MIDESP,
         "-keep", "0.25", "-fdr", "0.005",
         "-cont", "-k", "30",
-        "-noapc",       #FIXME че делать
+        "-noapc",       # FIXME че делать
         "./temp/data_ready_to_midesp.tped",
         "./temp/data_ready_to_midesp.tfam",
     ]

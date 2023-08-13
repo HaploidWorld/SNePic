@@ -29,16 +29,16 @@ def run_pipeline(filtered_pheno_path, prepared_geno_path, pheno_param):
 
 def run_filtering(filtered_pheno_path, prepared_geno_path):
     """
-    Runs filtering: QC and LD pruning 
+    Runs filtering: QC and LD pruning
     """
     print_and_log("Plink filtering starts...")
 
     run_qc(filtered_pheno_path, prepared_geno_path)
     print_and_log("QC done")
-    
+
     run_LD_pruning()
     print_and_log("LD Pruning done")
-    
+
     print_and_log("Filtering done...")
 
 
@@ -64,14 +64,14 @@ def run_LD_pruning():
     Runs LD pruning
     """
     params1 = [
-        "--indep-pairwise"] + [str(x) for x in config.LD_PARAMS] + [ 
+        "--indep-pairwise"] + [str(x) for x in config.LD_PARAMS] + [
         "--make-founders",
         "--double-id",
         "--out", "./temp/data_after_ld1",
         "--bfile", "./temp/data_after_qc"
     ] + CHR_SET_FLAG + NOSEX_AND_EXTRA_CHR
     params2 = [
-        "--double-id", 
+        "--double-id",
         "--extract", "./temp/data_after_ld1.prune.in",
         "--make-founders",
         "--out", "./temp/data_after_ld2",
@@ -92,11 +92,11 @@ def run_GWAS(filtered_pheno_path, pheno_param):
     Runs GWAS
     """
     params = [
-    "--bfile", "./temp/data_after_ld2",
-    "--pheno", filtered_pheno_path,
-    "--pheno-name", pheno_param,
-    "--linear", "--adjust",
-    "--out", config.OUTPUT_GWAS
+        "--bfile", "./temp/data_after_ld2",
+        "--pheno", filtered_pheno_path,
+        "--pheno-name", pheno_param,
+        "--linear", "--adjust",
+        "--out", config.OUTPUT_GWAS
     ] + NOSEX_AND_EXTRA_CHR
 
     print_and_log("GWAS starts...")

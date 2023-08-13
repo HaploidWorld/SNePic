@@ -20,7 +20,8 @@ def add_to_filename(filepath: str, to_add: str) -> str:
 
 def select_columns(filepath: str, columns: List[str], output: str = "") -> str:
     """
-    Saves modified tsv that contains only selected columns and returns the new file path
+    Saves modified tsv that contains only selected columns
+    and returns the new file path
     """
     if not output:
         output = add_to_filename(filepath, "but_" + ", ".join(columns))
@@ -58,7 +59,7 @@ def prepare_geno() -> str:
     """
     save_to = add_to_filename(INPUT_GENO, "IDs")
     with open(INPUT_GENO, 'r') as f:
-        lines = [l for l in f if not l.startswith('##')]
+        lines = [line for line in f if not line.startswith('##')]
     geno = pd.read_csv(io.StringIO(''.join(lines)), sep="\t")
 
     # FIXME 5 only for soybean
