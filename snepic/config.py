@@ -1,11 +1,8 @@
 THREADS = 6
-LOG_PATH = "./logs/snepic.log"
+LOG_PATH = "./snepic.log"
 
 # replace with the path of PLINK binary (e.g. /usr/bin/plink1.9)
 PLINK_COMMAND = "../plink/plink"
-
-# INPUT_GENO = "input.vcf"
-# INPUT_PHENO = "input.tsv"
 
 INPUT_GENO = "../data/soybean_aa_genotypes.vcf"
 INPUT_PHENO = "../data/soybean_aa_phenotypes_renamed.tsv"
@@ -23,5 +20,5 @@ LD_PARAMS = [10000, 5, 0.99]
 # TODO detect automatically
 CHR_COUNT = 20
 
-# FIXME ask
+# Phenotype parameter to check
 PHENO_PARAM = "Ala"

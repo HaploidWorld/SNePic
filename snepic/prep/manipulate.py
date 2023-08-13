@@ -61,7 +61,7 @@ def prepare_geno() -> str:
         lines = [l for l in f if not l.startswith('##')]
     geno = pd.read_csv(io.StringIO(''.join(lines)), sep="\t")
 
-    geno.loc[:, "#CHROM"] = geno.loc[:, "#CHROM"].str[5:]
+    geno.loc[:, "#CHROM"] = geno.loc[:, "#CHROM"].str
     geno["ID"] = geno[["#CHROM", "POS"]].astype(str).agg(':'.join, axis=1)
 
     geno.to_csv(save_to, sep="\t", index=False)
