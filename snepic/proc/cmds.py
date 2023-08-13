@@ -30,16 +30,20 @@ def run_proc(args: List[str], stdout = False):
         raise RuntimeError("Check logs")
 
 
-def run_midesp(tped: str, tfam: str):
+def run_midesp():
     args = [
         "java", 
         "-jar",  config.MIDESP_JAR,
         "-threads", str(config.THREADS), 
-        " -out", config.OUTPUT_MIDESP, 
+        "-out", config.OUTPUT_MIDESP,
         "-keep", "0.25", "-fdr", "0.005",
         "-cont", "-k", "30",
         "-noapc",       #FIXME че делать
         "./temp/data_ready_to_midesp.tped",
         "./temp/data_ready_to_midesp.tfam",
     ]
+    print("MIDESP started")
+    logging.info("MIDESP started")
     run_proc(args)
+    print("MIDESP finished")
+    logging.info("MIDESP finished")
